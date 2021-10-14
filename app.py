@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    with open('entities.json') as f:
+    with open('entities.json', encoding='utf-8') as f:
         entities = json.load(f)
         return render_template("main-all-items.html", entities=entities)
 
