@@ -12,9 +12,12 @@ def index():
         return render_template("main-all-items.html", entities=entities)
 
 
-@app.route('/paging')
-def paging():
-    return render_template("main.html")
+@app.route('/paging/<int:paging>')
+def paging(paging: int):
+    entities = ""
+    with open('entities.json', encoding='utf-8') as f:
+        entities = json.load(f)
+    return render_template("paging.html", entities=entities, page=paging)
 
 
 @app.route('/search')
