@@ -20,15 +20,16 @@ def paging():
 @app.route('/search')
 def search():
     model = request.args.get('model')
-    with open('entities.json') as f:
+    with open('entities.json', encoding='utf-8') as f:
         entities = json.load(f)
         response = []
         if not model:
             response = entities
         else:
-            for e in entities:
-                if e["model"] == model:
-                    response.append(e)
+            for x in model.split(" "):
+                for e in entities:
+                    if x.lower() in e["model"]:
+                        response.append(e)
         return render_template("search_ause.html", entities=response)
 
 
